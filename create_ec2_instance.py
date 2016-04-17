@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-import session
 import argparse
+import json
+import session
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-n", "--name", help="define the instance name",
@@ -13,14 +15,17 @@ args = parser.parse_args()
 name = args.name
 key  = args.key
 
-s = session.create_session()
+with open('ec2.json') as ec2_json:
+    ec2_config = json.load(ec2_json)
+
+s = session.create_session(ec2_config['region'])
 ec2 = s.resource('ec2')
 
 instances = ec2.create_instances(
-        ImageId='ami-d05e75b8',
-        InstanceType='t2.micro',
+        ImageId=ec2_config['image_id'],
+        InstanceType=ec2_config['instance_type'],
         KeyName = key,
-        SecurityGroupIds=['sg-eb8a4a92'],
+        SecurityGroupIds=ec2_config['group_ids'],
         MinCount=1, MaxCount=1
         )
 

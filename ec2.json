@@ -1,0 +1,6 @@
+{
+    "region":"us-east-1",
+    "image_id":"ami-d05e75b8",
+    "instance_type":"t2.micro",
+    "group_ids": ["sg-eb8a4a92"]
+}
