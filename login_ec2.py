@@ -5,6 +5,8 @@ import subprocess
 
 instances_list = list_ec2.list_instances()
 
+print instances_list
+
 choose_no = input('Choose an instance: ')
 choose_instance = instances_list[choose_no-1]
 

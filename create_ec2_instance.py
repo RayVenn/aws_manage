@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import argparse
-import json
 import session
+import parse_ec2
 
 
 parser = argparse.ArgumentParser()
@@ -15,8 +15,7 @@ args = parser.parse_args()
 name = args.name
 key  = args.key
 
-with open('ec2.json') as ec2_json:
-    ec2_config = json.load(ec2_json)
+ec2_config = parse_ec2.get_config('ec2_json')
 
 s = session.create_session(ec2_config['region'])
 ec2 = s.resource('ec2')
