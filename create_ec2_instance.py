@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-n", "--name", help="define the instance name",
         type=str, required=True)
 parser.add_argument("-k", "--key", help="choose a key for this new instance",
-        tyep=str, required=True)
+        type=str, required=True)
 
 args = parser.parse_args()
 name = args.name
