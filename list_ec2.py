@@ -2,9 +2,13 @@
 
 import subprocess
 import session
+import parse_ec2
 
 def list_instances():
-    s = session.create_session()
+
+    ec2_config = parse_ec2.get_config('ec2.json')
+
+    s = session.create_session(ec2_config['region'])
     ec2 = s.resource('ec2')
 
     instances = ec2.instances.all()
@@ -44,4 +48,4 @@ def list_instances():
 
         instances_list.append(i_map)
 
-    return instances
+    return instances_list
